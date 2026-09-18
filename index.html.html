@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4-Year Plan — BBA Finance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy-950: #0a1830;
+    --navy-900: #0f2747;
+    --navy-800: #14335c;
+    --navy-700: #1c4271;
+    --navy-600: #2a5486;
+    --navy-500: #3d6ba3;
+    --blue-tint: #eef2f9;
+    --orange-700: #b3410f;
+    --orange-600: #d1550f;
+    --orange-500: #ea6a1f;
+    --orange-400: #f2913f;
+    --orange-100: #fdece0;
+    --amber-700: #8a4a06;
+    --gray-500: #6b7280;
+    --gray-200: #e2e5ea;
+    --paper: #f6f7fb;
+    --card: #ffffff;
+    --ink: #16233a;
+    --ink-soft: #4a5875;
+    --line: #dbe0ea;
+    --good: var(--navy-700);
+    --mid: var(--orange-500);
+    --shadow: 0 1px 2px rgba(15, 39, 71, 0.06), 0 6px 16px rgba(15, 39, 71, 0.08);
+    --radius: 10px;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0a1830;
+      --card: #122544;
+      --ink: #eef2f9;
+      --ink-soft: #aebbd4;
+      --line: #223a5e;
+      --blue-tint: #16283f;
+      --orange-100: #3a2413;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0a1830;
+    --card: #122544;
+    --ink: #eef2f9;
+    --ink-soft: #aebbd4;
+    --line: #223a5e;
+    --orange-100: #3a2413;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+
+  .app-header {
+    background: linear-gradient(135deg, var(--navy-900), var(--navy-700) 65%, var(--navy-600));
+    color: #fff;
+    padding: 28px clamp(16px, 4vw, 40px) 22px;
+    border-bottom: 4px solid var(--orange-500);
+  }
+  .app-header .eyebrow-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .app-header h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(24px, 3vw, 32px);
+    margin: 0 0 4px;
+    letter-spacing: 0.2px;
+  }
+  .app-header p.sub {
+    margin: 0;
+    color: #cfdcef;
+    font-size: 14.5px;
+    max-width: 62ch;
+    line-height: 1.5;
+  }
+  .header-stat {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: var(--radius);
+    padding: 10px 18px;
+    text-align: right;
+    min-width: 160px;
+  }
+  .header-stat .num {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--orange-400);
+    line-height: 1;
+  }
+  .header-stat .lbl {
+    font-size: 11.5px;
+    color: #c6d5ea;
+    margin-top: 4px;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 22px;
+    padding: 22px clamp(16px, 4vw, 40px) 40px;
+    align-items: start;
+  }
+  @media (max-width: 880px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  /* ---------- sidebar ---------- */
+  .sidebar { position: sticky; top: 16px; padding: 16px; display: flex; flex-direction: column; gap: 14px; max-height: calc(100vh - 32px); overflow-y: auto; }
+  .sidebar h2 { font-family: var(--serif); font-size: 17px; margin: 0; }
+  .field label { display:block; font-size: 12px; font-weight: 600; color: var(--ink-soft); margin-bottom: 5px; }
+  select, input[type=text], input[type=number] {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 14px;
+  }
+  select:focus, input:focus, button:focus-visible, .course-card:focus-visible {
+    outline: 2px solid var(--orange-500);
+    outline-offset: 1px;
+  }
+  .catalog-link { font-size: 12.5px; color: var(--navy-500); text-decoration: underline; }
+  :root[data-theme="dark"] .catalog-link, :root:not([data-theme=light]) .catalog-link { color: var(--orange-400); }
+
+  .pool-list { display: flex; flex-direction: column; gap: 8px; min-height: 60px; padding-top: 2px; }
+  .pool-empty { font-size: 13px; color: var(--ink-soft); border: 1px dashed var(--line); border-radius: 8px; padding: 14px; text-align: center; }
+
+  .course-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 5px solid var(--cat-color, var(--navy-500));
+    border-radius: 8px;
+    padding: 8px 10px 9px;
+    cursor: grab;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+  .course-card:active { cursor: grabbing; }
+  .course-card.dragging { opacity: 0.4; }
+  .course-card .code-row { display:flex; justify-content: space-between; align-items:baseline; gap:6px; }
+  .course-card .code { font-weight: 700; letter-spacing: 0.2px; }
+  .course-card .credits { font-size: 11.5px; color: var(--ink-soft); white-space: nowrap; }
+  .course-card .title { color: var(--ink-soft); margin-top: 1px; }
+  .course-card .tagline { display:inline-block; margin-top:5px; font-size: 10.5px; font-weight:600; padding: 1px 7px; border-radius: 20px; background: var(--cat-color, var(--navy-500)); color: #fff; }
+  .card-remove { border:none; background:transparent; color: var(--ink-soft); cursor:pointer; font-size: 15px; line-height:1; padding: 0 2px; }
+  .card-remove:hover { color: var(--orange-600); }
+
+  .add-course-form { border-top: 1px dashed var(--line); padding-top: 12px; display:flex; flex-direction:column; gap:8px; }
+  .add-course-form .row2 { display:grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .btn {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13.5px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 8px 14px;
+    cursor: pointer;
+  }
+  .btn-orange { background: var(--orange-500); color: #fff; }
+  .btn-orange:hover { background: var(--orange-600); }
+  .btn-outline { background: transparent; border-color: var(--line); color: var(--ink); }
+  .btn-outline:hover { border-color: var(--navy-500); }
+
+  /* ---------- planner grid ---------- */
+  .year-block { margin-bottom: 20px; }
+  .year-heading { font-family: var(--serif); font-size: 15px; color: var(--ink-soft); margin: 0 0 8px 2px; display:flex; align-items:center; gap:8px;}
+  .year-heading .yr-badge { background: var(--navy-800); color:#fff; border-radius: 20px; padding: 2px 10px; font-family: var(--sans); font-size: 11.5px; font-weight:700; }
+  :root[data-theme="dark"] .year-heading .yr-badge, :root:not([data-theme=light]) .year-heading .yr-badge { background: var(--orange-500); }
+
+  .term-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 620px) { .term-row { grid-template-columns: 1fr; } }
+
+  .semester-box { padding: 12px; min-height: 150px; display:flex; flex-direction:column; }
+  .semester-box.dragover { outline: 2px dashed var(--orange-500); outline-offset: -4px; background: var(--orange-100); }
+  .semester-head { display:flex; justify-content: space-between; align-items:baseline; margin-bottom: 8px; }
+  .semester-head .name { font-weight: 700; font-size: 14px; }
+  .semester-head .season-fall { color: var(--orange-600); }
+  .semester-head .season-spring { color: var(--navy-600); }
+  :root[data-theme="dark"] .semester-head .season-spring, :root:not([data-theme=light]) .semester-head .season-spring { color: var(--navy-500); }
+  .credit-pill { font-size: 11.5px; font-weight: 700; padding: 2px 9px; border-radius: 20px; background: var(--blue-tint); color: var(--navy-800); }
+  .credit-pill.warn { background: var(--orange-100); color: var(--orange-700); }
+  :root[data-theme="dark"] .credit-pill, :root:not([data-theme=light]) .credit-pill { background: var(--navy-800); color: #cfe0f6; }
+  .semester-list { flex: 1; display:flex; flex-direction:column; gap: 6px; }
+  .drop-hint { font-size: 12px; color: var(--ink-soft); text-align:center; padding: 14px 4px; border: 1px dashed var(--line); border-radius: 8px; }
+
+  /* ---------- progress panel ---------- */
+  .progress-panel { grid-column: 1 / -1; padding: 20px clamp(16px,3vw,28px); margin-top: 4px; }
+  .progress-panel h2 { font-family: var(--serif); font-size: 20px; margin: 0 0 3px; }
+  .progress-panel .lede { color: var(--ink-soft); font-size: 13.5px; margin: 0 0 18px; max-width: 72ch; }
+  .overall-bar-wrap { margin-bottom: 20px; }
+  .bar-track { background: var(--blue-tint); border-radius: 20px; height: 12px; overflow: hidden; }
+  :root[data-theme="dark"] .bar-track, :root:not([data-theme=light]) .bar-track { background: var(--navy-800); }
+  .bar-fill { height: 100%; background: linear-gradient(90deg, var(--navy-700), var(--orange-500)); border-radius: 20px; transition: width .25s ease; }
+  .bar-label { display:flex; justify-content: space-between; font-size: 12.5px; color: var(--ink-soft); margin-top: 5px; }
+
+  .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .cat-card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
+  .cat-card .cat-top { display:flex; justify-content: space-between; align-items:baseline; gap: 8px; }
+  .cat-card h3 { font-size: 14.5px; margin: 0; font-family: var(--serif); }
+  .cat-card .cat-frac { font-size: 12.5px; font-weight:700; color: var(--ink-soft); }
+  .cat-card .cat-note { font-size: 11.5px; color: var(--ink-soft); margin: 4px 0 10px; }
+  .cat-track { background: var(--blue-tint); border-radius: 20px; height: 8px; overflow:hidden; margin-bottom: 10px;}
+  :root[data-theme="dark"] .cat-track, :root:not([data-theme=light]) .cat-track { background: var(--navy-800); }
+  .cat-fill { height: 100%; border-radius: 20px; }
+  .req-row { display:flex; justify-content: space-between; gap: 8px; font-size: 12.5px; padding: 4px 0; border-top: 1px solid var(--line); }
+  .req-row:first-of-type { border-top: none; }
+  .req-row .req-name { color: var(--ink); }
+  .req-row .req-code { color: var(--ink-soft); font-size: 11px; display:block; }
+  .status-chip { font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 20px; white-space: nowrap; height: fit-content; }
+  .status-complete { background: var(--navy-800); color: #fff; }
+  .status-inprogress { background: var(--orange-500); color: #fff; }
+  .status-planned { background: var(--orange-100); color: var(--orange-700); border: 1px solid var(--orange-400); }
+  .status-needed { background: var(--blue-tint); color: var(--ink-soft); }
+  :root[data-theme="dark"] .status-needed, :root:not([data-theme=light]) .status-needed { background: var(--navy-800); color: var(--ink-soft); }
+
+  .footnote { font-size: 11.5px; color: var(--ink-soft); margin-top: 16px; border-top: 1px dashed var(--line); padding-top: 10px; }
+  ::-webkit-scrollbar { width: 9px; height: 9px; }
+  ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 20px; }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="eyebrow-row">
+    <div>
+      <h1>4-Year Plan · BBA in Finance</h1>
+      <p class="sub">Drag courses from your catalog pool into a semester to build the path to your 120-hour degree. Everything here is pulled from your UTSA degree audit for Finance, Carlos Alvarez College of Business.</p>
+    </div>
+    <div class="header-stat">
+      <div class="num" id="stat-total">0 / 120</div>
+      <div class="lbl">credit hours planned</div>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="panel sidebar" aria-label="Course catalog pool">
+    <h2>Course catalog</h2>
+    <div class="field">
+      <label for="dept-select">Department (school)</label>
+      <select id="dept-select"></select>
+    </div>
+    <div class="field">
+      <label for="search-input">Search</label>
+      <input type="text" id="search-input" placeholder="Course code or title">
+    </div>
+    <a class="catalog-link" href="https://catalog.utsa.edu/undergraduate/business/finance/" target="_blank" rel="noopener">Open UTSA catalog ↗</a>
+
+    <div id="pool-list" class="pool-list" data-zone="pool"></div>
+
+    <div class="add-course-form">
+      <label style="font-size:12px;font-weight:600;color:var(--ink-soft);">Add another catalog course</label>
+      <input type="text" id="nc-code" placeholder="Course code, e.g. FIN 4123">
+      <input type="text" id="nc-title" placeholder="Title">
+      <div class="row2">
+        <input type="number" id="nc-credits" placeholder="Credits" min="0" max="6" value="3">
+        <select id="nc-dept"></select>
+      </div>
+      <select id="nc-cat"></select>
+      <button class="btn btn-orange" id="nc-add">Add to pool</button>
+    </div>
+    <button class="btn btn-outline" id="reset-btn">Reset plan</button>
+  </aside>
+
+  <main id="planner-main"></main>
+
+  <section class="panel progress-panel" aria-label="Degree progress">
+    <h2>Degree progress</h2>
+    <p class="lede">Tracked against your UTSA degree audit. A requirement moves to "Planned" once its course is placed in a semester above, and to "Completed" or "In progress" if your transcript already shows it that way.</p>
+    <div class="overall-bar-wrap">
+      <div class="bar-track"><div class="bar-fill" id="overall-fill" style="width:0%"></div></div>
+      <div class="bar-label"><span id="overall-text">0 of 120 hours placed</span><span id="upperdiv-text">0 of 39 upper-division hours</span></div>
+    </div>
+    <div class="cat-grid" id="cat-grid"></div>
+    <p class="footnote">A few courses (like Calculus I and FIN 3013) satisfy two requirement sections at once on the real audit — they're counted once here in their primary section, so section totals won't always sum to exactly 120. Multi-option requirements show one recommended course; swap it for whichever option you'd rather take.</p>
+  </section>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  const SEMESTERS = [
+    {id:'fall-2026', season:'Fall', year:'2026/2027'},
+    {id:'spring-2027', season:'Spring', year:'2026/2027'},
+    {id:'fall-2027', season:'Fall', year:'2027/2028'},
+    {id:'spring-2028', season:'Spring', year:'2027/2028'},
+    {id:'fall-2028', season:'Fall', year:'2028/2029'},
+    {id:'spring-2029', season:'Spring', year:'2028/2029'},
+    {id:'fall-2029', season:'Fall', year:'2029/2030'},
+    {id:'spring-2030', season:'Spring', year:'2029/2030'},
+  ];
+
+  const CATS = {
+    core:    {label:'Core Curriculum',        required:42, color:'var(--navy-700)',  note:'Communication, math, sciences, history, government, culture.'},
+    cbk:     {label:'Common Body of Knowledge', required:42, color:'var(--navy-500)', note:'Foundational business coursework required of every major.'},
+    major:   {label:'Finance Major',          required:36, color:'var(--orange-600)', note:'Required finance courses plus 12 hrs of upper-division finance electives.'},
+    support: {label:'Finance Support Work',   required:9,  color:'var(--orange-400)', note:'Upper-division business electives outside the major.'},
+    compass: {label:'Career Compass',         required:1,  color:'var(--navy-800)',  note:'One-hour professional development course.'},
+    honors:  {label:'Honors College Path',    required:24, color:'var(--amber-700, #8a4a06)', note:'Optional — only needed if you\'re pursuing Honors College graduation.'},
+    elective:{label:'Electives / Other',      required:0,  color:'var(--gray-500)', note:'Any additional catalog courses you add yourself.'},
+  };
+
+  const BASE_COURSES = [
+    // Completed / in progress — Fall 2026
+    {id:'wrc1013', code:'WRC 1013', title:'Freshman Composition I', credits:3, dept:'WRC', category:'core', status:'complete', upperDiv:false},
+    {id:'mat1213', code:'MAT 1213', title:'Calculus I', credits:3, dept:'MAT', category:'core', status:'complete', upperDiv:false},
+    {id:'es2013', code:'ES 2013', title:'Intro to Environmental Sci I', credits:3, dept:'ES', category:'core', status:'complete', upperDiv:false},
+    {id:'es2023', code:'ES 2023', title:'Intro to Environmental Sci II', credits:3, dept:'ES', category:'core', status:'complete', upperDiv:false},
+    {id:'his2133', code:'HIS 2133', title:'Intro: World Civ since 15th Cen', credits:3, dept:'HIS', category:'core', status:'complete', upperDiv:false},
+    {id:'his1043', code:'HIS 1043', title:'US History: Pre-Columbus to Civil War', credits:3, dept:'HIS', category:'core', status:'complete', upperDiv:false},
+    {id:'his1053', code:'HIS 1053', title:'US History: Civil War to Present', credits:3, dept:'HIS', category:'core', status:'complete', upperDiv:false},
+    {id:'pol1013', code:'POL 1013', title:'Intro to American Politics', credits:3, dept:'POL', category:'core', status:'complete', upperDiv:false},
+    {id:'pol1133', code:'POL 1133', title:'Texas Politics and Society', credits:3, dept:'POL', category:'core', status:'inprogress', upperDiv:false},
+    {id:'psy1013', code:'PSY 1013', title:'Introduction to Psychology', credits:3, dept:'PSY', category:'core', status:'complete', upperDiv:false},
+    {id:'ais1203', code:'AIS 1203', title:'HON AIS: Global Community', credits:3, dept:'AIS', category:'core', status:'inprogress', upperDiv:false},
+    {id:'eng2013', code:'ENG 2013', title:'Introduction to Literature', credits:3, dept:'ENG', category:'core', status:'complete', upperDiv:false},
+    {id:'acc2013', code:'ACC 2013', title:'Principles of Accounting I', credits:3, dept:'ACC', category:'cbk', status:'inprogress', upperDiv:false},
+    {id:'ban1023', code:'BAN 1023', title:'Intro Business Statistics', credits:3, dept:'BAN', category:'cbk', status:'inprogress', upperDiv:false},
+    {id:'eco2023', code:'ECO 2023', title:'Introductory Microeconomics', credits:3, dept:'ECO', category:'cbk', status:'inprogress', upperDiv:false},
+    {id:'hon1000', code:'HON 1000', title:'Honors 101', credits:0, dept:'HON', category:'honors', status:'inprogress', upperDiv:false},
+    {id:'hon1100', code:'HON 1100', title:'Special Scholars Seminar', credits:0, dept:'HON', category:'elective', status:'inprogress', upperDiv:false},
+
+    // Core — still needed
+    {id:'wrc1023', code:'WRC 1023', title:'Freshman Composition II', credits:3, dept:'WRC', category:'core', status:'needed', upperDiv:false},
+    {id:'creative', code:'Creative Arts', title:'Creative Arts requirement (pick 1, e.g. ART 1103)', credits:3, dept:'MISC', category:'core', status:'needed', upperDiv:false},
+
+    // CBK — still needed
+    {id:'acc2033', code:'ACC 2033', title:'Principles of Accounting II', credits:3, dept:'ACC', category:'cbk', status:'needed', upperDiv:false},
+    {id:'eco2013', code:'ECO 2013', title:'Introductory Macroeconomics', credits:3, dept:'ECO', category:'cbk', status:'needed', upperDiv:false},
+    {id:'gba3001', code:'GBA 3001/3002', title:'Foundations of Business Career Readiness & Comm.', credits:3, dept:'GBA', category:'cbk', status:'needed', upperDiv:true},
+    {id:'isc3003', code:'ISC 3003', title:'Principles of Info Systems for Management', credits:3, dept:'ISC', category:'cbk', status:'needed', upperDiv:true},
+    {id:'mgt3013', code:'MGT 3013', title:'Intro to Organization Theory, Behavior & Mgmt', credits:3, dept:'MGT', category:'cbk', status:'needed', upperDiv:true},
+    {id:'mgt3113', code:'MGT 3113', title:'Legal, Social & Ethical Issues in Business', credits:3, dept:'MGT', category:'cbk', status:'needed', upperDiv:true},
+    {id:'mkt3013', code:'MKT 3013', title:'Principles of Marketing', credits:3, dept:'MKT', category:'cbk', status:'needed', upperDiv:true},
+    {id:'analytics', code:'ECO 3103 / BAN 3043', title:'Business/Data Analytics or Statistical Methods', credits:3, dept:'BAN', category:'cbk', status:'needed', upperDiv:true},
+    {id:'scm3013', code:'SCM 3013', title:'Principles of Operations & Supply Chain Mgmt', credits:3, dept:'SCM', category:'cbk', status:'needed', upperDiv:true},
+    {id:'explearn', code:'GBA 4033 / etc.', title:'Experiential Learning option', credits:3, dept:'GBA', category:'cbk', status:'needed', upperDiv:true},
+
+    // Major
+    {id:'fin3013', code:'FIN 3013', title:'Principles of Business Finance', credits:3, dept:'FIN', category:'major', status:'needed', upperDiv:true},
+    {id:'acc3053', code:'ACC 3053', title:'Intermediate Accounting for Finance Majors', credits:3, dept:'ACC', category:'major', status:'needed', upperDiv:true},
+    {id:'fact', code:'FACT Exam', title:'Finance Assessment of Competency Test (non-credit)', credits:0, dept:'FIN', category:'major', status:'needed', upperDiv:false},
+    {id:'fin3023', code:'FIN 3023', title:'Intermediate Corporate Finance', credits:3, dept:'FIN', category:'major', status:'needed', upperDiv:true},
+    {id:'fin3033', code:'FIN 3033', title:'Principles of Investment', credits:3, dept:'FIN', category:'major', status:'needed', upperDiv:true},
+    {id:'fin3313', code:'FIN 3313', title:'Interest Rates, Money and Banking', credits:3, dept:'FIN', category:'major', status:'needed', upperDiv:true},
+    {id:'fin3063', code:'FIN 3063', title:'Computer Modeling of Financial Applications', credits:3, dept:'FIN', category:'major', status:'needed', upperDiv:true},
+    {id:'fin3603', code:'FIN 3603', title:'Intro to Data Science for Finance Majors', credits:3, dept:'FIN', category:'major', status:'needed', upperDiv:true},
+    {id:'fin4893', code:'FIN 4893', title:'Cases and Problems in Finance', credits:3, dept:'FIN', category:'major', status:'needed', upperDiv:true},
+    {id:'finelec1', code:'FIN Elective', title:'Upper-division Finance elective 1 (FIN 3000–4999)', credits:3, dept:'FIN', category:'major', status:'needed', upperDiv:true},
+    {id:'finelec2', code:'FIN Elective', title:'Upper-division Finance elective 2 (FIN 3000–4999)', credits:3, dept:'FIN', category:'major', status:'needed', upperDiv:true},
+    {id:'finelec3', code:'FIN Elective', title:'Upper-division Finance elective 3 (FIN 3000–4999)', credits:3, dept:'FIN', category:'major', status:'needed', upperDiv:true},
+    {id:'finelec4', code:'FIN Elective', title:'Upper-division Finance elective 4 (FIN 3000–4999)', credits:3, dept:'FIN', category:'major', status:'needed', upperDiv:true},
+
+    // Support work
+    {id:'busselec1', code:'Business Elective', title:'Upper-division business elective 1', credits:3, dept:'MISC', category:'support', status:'needed', upperDiv:true},
+    {id:'busselec2', code:'Business Elective', title:'Upper-division business elective 2', credits:3, dept:'MISC', category:'support', status:'needed', upperDiv:true},
+
+    // Career Compass
+    {id:'bu1010', code:'BU 1010', title:'Career Compass', credits:1, dept:'BU', category:'compass', status:'needed', upperDiv:false},
+
+    // Honors (optional path)
+    {id:'hon2301', code:'HON 2301', title:'The Civic Ethos', credits:3, dept:'HON', category:'honors', status:'needed', upperDiv:false},
+    {id:'honworld', code:'CSH 1213 / HON 2983', title:'Topics in World Cultures (Honors) / Tutorial I', credits:3, dept:'HON', category:'honors', status:'needed', upperDiv:false},
+    {id:'honcomp2', code:'HON 3980 / WRC 1023-H', title:'Freshman Comp II (Honors) / Tutorial II', credits:3, dept:'HON', category:'honors', status:'needed', upperDiv:false},
+    {id:'honelec1', code:'Honors Elective', title:'Honors elective 1', credits:3, dept:'HON', category:'honors', status:'needed', upperDiv:true},
+    {id:'honelec2', code:'Honors Elective', title:'Honors elective 2', credits:3, dept:'HON', category:'honors', status:'needed', upperDiv:true},
+    {id:'honsel1', code:'Honors Select', title:'Honors select class 1', credits:3, dept:'HON', category:'honors', status:'needed', upperDiv:true},
+    {id:'honsel2', code:'Honors Select', title:'Honors select class 2', credits:3, dept:'HON', category:'honors', status:'needed', upperDiv:true},
+    {id:'honsel3', code:'Honors Select', title:'Honors select class 3', credits:3, dept:'HON', category:'honors', status:'needed', upperDiv:true},
+  ];
+
+  const STORE_KEY = 'bba-planner-v1';
+  let customCourses = [];
+  let placements = {};
+
+  function loadState(){
+    try {
+      const raw = localStorage.getItem(STORE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        placements = parsed.placements || {};
+        customCourses = parsed.customCourses || [];
+        return;
+      }
+    } catch(e) { /* ignore, fall through to defaults */ }
+    placements = {};
+    BASE_COURSES.forEach(c => {
+      placements[c.id] = (c.status === 'complete' || c.status === 'inprogress') ? 'fall-2026' : null;
+    });
+  }
+
+  function saveState(){
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({placements, customCourses}));
+    } catch(e) { /* storage unavailable — plan still works this session */ }
+  }
+
+  function allCourses(){ return BASE_COURSES.concat(customCourses); }
+  function getCourse(id){ return allCourses().find(c => c.id === id); }
+
+  function catColor(cat){ return (CATS[cat] && CATS[cat].color) || 'var(--gray-500)'; }
+
+  function renderDeptSelect(){
+    const depts = Array.from(new Set(allCourses().map(c => c.dept))).sort();
+    const label = d => d === 'MISC' ? 'Other / Multi-department' : d;
+    const opts = ['<option value="all">All departments</option>']
+      .concat(depts.map(d => `<option value="${d}">${label(d)}</option>`));
+    document.getElementById('dept-select').innerHTML = opts.join('');
+    document.getElementById('nc-dept').innerHTML = depts.map(d => `<option value="${d}">${label(d)}</option>`).join('') + '<option value="MISC">Other</option>';
+    document.getElementById('nc-cat').innerHTML = Object.keys(CATS).map(k => `<option value="${k}">${CATS[k].label}</option>`).join('');
+  }
+
+  function statusOf(course){
+    if (course.status === 'complete') return {key:'complete', text:'Completed'};
+    if (course.status === 'inprogress') return {key:'inprogress', text:'In progress'};
+    const sem = placements[course.id];
+    if (sem) {
+      const s = SEMESTERS.find(x => x.id === sem);
+      return {key:'planned', text: s ? `Planned · ${s.season} ${s.year.split('/')[0]}` : 'Planned'};
+    }
+    return {key:'needed', text:'Needed'};
+  }
+
+  function courseCardHTML(course, opts){
+    opts = opts || {};
+    const st = statusOf(course);
+    const removable = opts.removable;
+    return `<div class="course-card" draggable="true" data-id="${course.id}" style="--cat-color:${catColor(course.category)}" tabindex="0">
+      <div class="code-row">
+        <span class="code">${course.code}</span>
+        <span class="credits">${course.credits} cr${removable ? ` <button class="card-remove" data-remove="${course.id}" title="Send back to pool" aria-label="Remove from semester">×</button>` : ''}</span>
+      </div>
+      <div class="title">${course.title}</div>
+      <span class="tagline">${CATS[course.category] ? CATS[course.category].label : course.category}</span>
+    </div>`;
+  }
+
+  function renderPool(){
+    const dept = document.getElementById('dept-select').value;
+    const q = document.getElementById('search-input').value.trim().toLowerCase();
+    const list = allCourses().filter(c => {
+      if (placements[c.id]) return false;
+      if (dept !== 'all' && c.dept !== dept) return false;
+      if (q && !(c.code.toLowerCase().includes(q) || c.title.toLowerCase().includes(q))) return false;
+      return true;
+    });
+    const el = document.getElementById('pool-list');
+    if (!list.length) {
+      el.innerHTML = '<div class="pool-empty">No unplaced courses match this filter.</div>';
+    } else {
+      el.innerHTML = list.map(c => courseCardHTML(c)).join('');
+    }
+  }
+
+  function creditsInSemester(semId){
+    return allCourses().filter(c => placements[c.id] === semId).reduce((s,c) => s + c.credits, 0);
+  }
+
+  function renderPlanner(){
+    const main = document.getElementById('planner-main');
+    let html = '';
+    for (let y = 0; y < 4; y++) {
+      const fall = SEMESTERS[y*2];
+      const spring = SEMESTERS[y*2+1];
+      html += `<div class="year-block">
+        <div class="year-heading"><span class="yr-badge">Year ${y+1}</span> ${fall.year}</div>
+        <div class="term-row">
+          ${semesterBoxHTML(fall)}
+          ${semesterBoxHTML(spring)}
+        </div>
+      </div>`;
+    }
+    main.innerHTML = html;
+  }
+
+  function semesterBoxHTML(sem){
+    const courses = allCourses().filter(c => placements[c.id] === sem.id);
+    const credits = courses.reduce((s,c) => s + c.credits, 0);
+    const warn = credits > 0 && (credits < 12 || credits > 18);
+    return `<div class="panel semester-box" data-zone="${sem.id}">
+      <div class="semester-head">
+        <span class="name season-${sem.season.toLowerCase()}">${sem.season} Semester — ${sem.year}</span>
+        <span class="credit-pill ${warn ? 'warn' : ''}">${credits} cr</span>
+      </div>
+      <div class="semester-list" data-zone="${sem.id}">
+        ${courses.length ? courses.map(c => courseCardHTML(c, {removable:true})).join('') : '<div class="drop-hint">Drag a course here</div>'}
+      </div>
+    </div>`;
+  }
+
+  function renderProgress(){
+    const total = Object.keys(CATS).filter(k => k !== 'honors').reduce((sum, k) => {
+      const earned = allCourses().filter(c => c.category === k && placements[c.id]).reduce((s,c) => s + c.credits, 0);
+      return sum + earned;
+    }, 0);
+    const overallPct = Math.min(100, Math.round(total / 120 * 100));
+    document.getElementById('overall-fill').style.width = overallPct + '%';
+    document.getElementById('overall-text').textContent = `${total} of 120 hours placed`;
+    document.getElementById('stat-total').textContent = `${total} / 120`;
+
+    const upperDivEarned = allCourses().filter(c => c.upperDiv && placements[c.id]).reduce((s,c)=>s+c.credits,0);
+    document.getElementById('upperdiv-text').textContent = `${upperDivEarned} of 39 upper-division hours`;
+
+    const grid = document.getElementById('cat-grid');
+    grid.innerHTML = Object.keys(CATS).map(key => {
+      const meta = CATS[key];
+      const courses = allCourses().filter(c => c.category === key);
+      if (!courses.length) return '';
+      const earned = courses.filter(c => placements[c.id]).reduce((s,c)=>s+c.credits,0);
+      const pct = meta.required > 0 ? Math.min(100, Math.round(earned / meta.required * 100)) : (earned>0?100:0);
+      const rows = courses.map(c => {
+        const st = statusOf(c);
+        return `<div class="req-row">
+          <span><span class="req-name">${c.title}</span><span class="req-code">${c.code} · ${c.credits} cr</span></span>
+          <span class="status-chip status-${st.key}">${st.text}</span>
+        </div>`;
+      }).join('');
+      return `<div class="cat-card">
+        <div class="cat-top"><h3>${meta.label}</h3><span class="cat-frac">${earned}${meta.required ? ' / ' + meta.required : ''} cr</span></div>
+        <div class="cat-note">${meta.note}</div>
+        <div class="cat-track"><div class="cat-fill" style="width:${pct}%;background:${meta.color}"></div></div>
+        ${rows}
+      </div>`;
+    }).join('');
+  }
+
+  function renderAll(){
+    renderPool();
+    renderPlanner();
+    renderProgress();
+    attachDnD();
+  }
+
+  function setPlacement(id, zone){
+    placements[id] = (zone && zone !== 'pool') ? zone : null;
+    saveState();
+    renderAll();
+  }
+
+  function attachDnD(){
+    document.querySelectorAll('.course-card').forEach(card => {
+      card.addEventListener('dragstart', e => {
+        e.dataTransfer.setData('text/plain', card.dataset.id);
+        card.classList.add('dragging');
+      });
+      card.addEventListener('dragend', () => card.classList.remove('dragging'));
+    });
+    document.querySelectorAll('.card-remove').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        setPlacement(btn.dataset.remove, null);
+      });
+    });
+    document.querySelectorAll('[data-zone]').forEach(zone => {
+      zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+      zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+      zone.addEventListener('drop', e => {
+        e.preventDefault();
+        zone.classList.remove('dragover');
+        const id = e.dataTransfer.getData('text/plain');
+        if (id) setPlacement(id, zone.dataset.zone);
+      });
+    });
+  }
+
+  // controls
+  document.getElementById('dept-select').addEventListener('change', renderPool);
+  document.getElementById('search-input').addEventListener('input', renderPool);
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    if (!confirm('Reset the whole plan back to just your completed and in-progress courses?')) return;
+    customCourses = [];
+    loadDefaultPlacements();
+    saveState();
+    renderAll();
+  });
+  document.getElementById('nc-add').addEventListener('click', () => {
+    const code = document.getElementById('nc-code').value.trim();
+    const title = document.getElementById('nc-title').value.trim();
+    const credits = parseFloat(document.getElementById('nc-credits').value) || 0;
+    const dept = document.getElementById('nc-dept').value;
+    const category = document.getElementById('nc-cat').value;
+    if (!code || !title) { alert('Add a course code and title first.'); return; }
+    const id = 'custom-' + Date.now();
+    customCourses.push({id, code, title, credits, dept, category, status:'needed', upperDiv: /[3-4]\d{3}/.test(code)});
+    document.getElementById('nc-code').value = '';
+    document.getElementById('nc-title').value = '';
+    saveState();
+    renderDeptSelect();
+    renderAll();
+  });
+
+  function loadDefaultPlacements(){
+    placements = {};
+    BASE_COURSES.forEach(c => {
+      placements[c.id] = (c.status === 'complete' || c.status === 'inprogress') ? 'fall-2026' : null;
+    });
+  }
+
+  loadState();
+  renderDeptSelect();
+  renderAll();
+})();
+</script>
+</body>
+</html>
